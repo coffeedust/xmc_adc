@@ -1,0 +1,254 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,6
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "adc_measurement_conf.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .global global_iclass_config
+  20              	 .section .rodata.global_iclass_config,"a",%progbits
+  21              	 .align 2
+  24              	global_iclass_config:
+  25 0000 00000000 	 .space 4
+  26              	 .global BatteryVoltage_ch_config
+  27              	 .section .data.BatteryVoltage_ch_config,"aw",%progbits
+  28              	 .align 2
+  31              	BatteryVoltage_ch_config:
+  32 0000 02       	 .byte 2
+  33 0001 00       	 .byte 0
+  34 0002 24       	 .byte 36
+  35 0003 00       	 .byte 0
+  36 0004 00000000 	 .word 0
+  37 0008 00000000 	 .space 4
+  38 000c 00       	 .byte 0
+  39 000d FF       	 .byte -1
+  40 000e 0000     	 .space 2
+  41              	 .global BatteryVoltage_res_config
+  42              	 .section .bss.BatteryVoltage_res_config,"aw",%nobits
+  43              	 .align 2
+  46              	BatteryVoltage_res_config:
+  47 0000 00000000 	 .space 4
+  48              	 .global ADC_MEASUREMENT_BatteryVoltage_handle
+  49              	 .section .data.ADC_MEASUREMENT_BatteryVoltage_handle,"aw",%progbits
+  50              	 .align 2
+  53              	ADC_MEASUREMENT_BatteryVoltage_handle:
+  54 0000 00000000 	 .word BatteryVoltage_ch_config
+  55 0004 00000000 	 .word BatteryVoltage_res_config
+  56 0008 00440040 	 .word 1073759232
+  57 000c 00       	 .byte 0
+  58 000d 00       	 .byte 0
+  59 000e 0000     	 .space 2
+  60              	 .global Termperature_ch_config
+  61              	 .section .data.Termperature_ch_config,"aw",%progbits
+  62              	 .align 2
+  65              	Termperature_ch_config:
+  66 0000 02       	 .byte 2
+  67 0001 00       	 .byte 0
+  68 0002 2F       	 .byte 47
+  69 0003 00       	 .byte 0
+  70 0004 00000000 	 .word 0
+  71 0008 00000000 	 .space 4
+  72 000c 00       	 .byte 0
+  73 000d FF       	 .byte -1
+  74 000e 0000     	 .space 2
+  75              	 .global Termperature_res_config
+  76              	 .section .bss.Termperature_res_config,"aw",%nobits
+  77              	 .align 2
+  80              	Termperature_res_config:
+  81 0000 00000000 	 .space 4
+  82              	 .global ADC_MEASUREMENT_Termperature_handle
+  83              	 .section .data.ADC_MEASUREMENT_Termperature_handle,"aw",%progbits
+  84              	 .align 2
+  87              	ADC_MEASUREMENT_Termperature_handle:
+  88 0000 00000000 	 .word Termperature_ch_config
+  89 0004 00000000 	 .word Termperature_res_config
+  90 0008 00440040 	 .word 1073759232
+  91 000c 00       	 .byte 0
+  92 000d 01       	 .byte 1
+  93 000e 0000     	 .space 2
+  94              	 .global lumen_ch_config
+  95              	 .section .data.lumen_ch_config,"aw",%progbits
+  96              	 .align 2
+  99              	lumen_ch_config:
+ 100 0000 02       	 .byte 2
+ 101 0001 00       	 .byte 0
+ 102 0002 2F       	 .byte 47
+ 103 0003 00       	 .byte 0
+ 104 0004 00000000 	 .word 0
+ 105 0008 00000000 	 .space 4
+ 106 000c 00       	 .byte 0
+ 107 000d FF       	 .byte -1
+ 108 000e 0000     	 .space 2
+ 109              	 .global lumen_res_config
+ 110              	 .section .bss.lumen_res_config,"aw",%nobits
+ 111              	 .align 2
+ 114              	lumen_res_config:
+ 115 0000 00000000 	 .space 4
+ 116              	 .global ADC_MEASUREMENT_lumen_handle
+ 117              	 .section .data.ADC_MEASUREMENT_lumen_handle,"aw",%progbits
+ 118              	 .align 2
+ 121              	ADC_MEASUREMENT_lumen_handle:
+ 122 0000 00000000 	 .word lumen_ch_config
+ 123 0004 00000000 	 .word lumen_res_config
+ 124 0008 00480040 	 .word 1073760256
+ 125 000c 01       	 .byte 1
+ 126 000d 02       	 .byte 2
+ 127 000e 0000     	 .space 2
+ 128              	 .global weight_ch_config
+ 129              	 .section .data.weight_ch_config,"aw",%progbits
+ 130              	 .align 2
+ 133              	weight_ch_config:
+ 134 0000 02       	 .byte 2
+ 135 0001 00       	 .byte 0
+ 136 0002 23       	 .byte 35
+ 137 0003 00       	 .byte 0
+ 138 0004 00000000 	 .word 0
+ 139 0008 00000000 	 .space 4
+ 140 000c 00       	 .byte 0
+ 141 000d FF       	 .byte -1
+ 142 000e 0000     	 .space 2
+ 143              	 .global weight_res_config
+ 144              	 .section .bss.weight_res_config,"aw",%nobits
+ 145              	 .align 2
+ 148              	weight_res_config:
+ 149 0000 00000000 	 .space 4
+ 150              	 .global ADC_MEASUREMENT_weight_handle
+ 151              	 .section .data.ADC_MEASUREMENT_weight_handle,"aw",%progbits
+ 152              	 .align 2
+ 155              	ADC_MEASUREMENT_weight_handle:
+ 156 0000 00000000 	 .word weight_ch_config
+ 157 0004 00000000 	 .word weight_res_config
+ 158 0008 00480040 	 .word 1073760256
+ 159 000c 01       	 .byte 1
+ 160 000d 03       	 .byte 3
+ 161 000e 0000     	 .space 2
+ 162              	 .global current_ch_config
+ 163              	 .section .data.current_ch_config,"aw",%progbits
+ 164              	 .align 2
+ 167              	current_ch_config:
+ 168 0000 02       	 .byte 2
+ 169 0001 00       	 .byte 0
+ 170 0002 20       	 .byte 32
+ 171 0003 00       	 .byte 0
+ 172 0004 00000000 	 .word 0
+ 173 0008 00000000 	 .space 4
+ 174 000c 00       	 .byte 0
+ 175 000d FF       	 .byte -1
+ 176 000e 0000     	 .space 2
+ 177              	 .global current_res_config
+ 178              	 .section .bss.current_res_config,"aw",%nobits
+ 179              	 .align 2
+ 182              	current_res_config:
+ 183 0000 00000000 	 .space 4
+ 184              	 .global ADC_MEASUREMENT_current_handle
+ 185              	 .section .data.ADC_MEASUREMENT_current_handle,"aw",%progbits
+ 186              	 .align 2
+ 189              	ADC_MEASUREMENT_current_handle:
+ 190 0000 00000000 	 .word current_ch_config
+ 191 0004 00000000 	 .word current_res_config
+ 192 0008 004C0040 	 .word 1073761280
+ 193 000c 02       	 .byte 2
+ 194 000d 00       	 .byte 0
+ 195 000e 0000     	 .space 2
+ 196              	 .global ADC_MEASUREMENT_channel_array
+ 197              	 .section .data.ADC_MEASUREMENT_channel_array,"aw",%progbits
+ 198              	 .align 2
+ 201              	ADC_MEASUREMENT_channel_array:
+ 202 0000 00000000 	 .word ADC_MEASUREMENT_BatteryVoltage_handle
+ 203 0004 00000000 	 .word ADC_MEASUREMENT_Termperature_handle
+ 204 0008 00000000 	 .word ADC_MEASUREMENT_lumen_handle
+ 205 000c 00000000 	 .word ADC_MEASUREMENT_weight_handle
+ 206 0010 00000000 	 .word ADC_MEASUREMENT_current_handle
+ 207              	 .global backgnd_config
+ 208              	 .section .rodata.backgnd_config,"a",%progbits
+ 209              	 .align 2
+ 212              	backgnd_config:
+ 213 0000 05       	 .byte 5
+ 214 0001 000000   	 .space 3
+ 215 0004 00       	 .space 1
+ 216 0005 00       	 .byte 0
+ 217 0006 00       	 .byte 0
+ 218 0007 00       	 .byte 0
+ 219 0008 00       	 .byte 0
+ 220 0009 000000   	 .space 3
+ 221              	 .global ADC_MEASUREMENT_0
+ 222              	 .section .data.ADC_MEASUREMENT_0,"aw",%progbits
+ 223              	 .align 2
+ 226              	ADC_MEASUREMENT_0:
+ 227 0000 00000000 	 .word ADC_MEASUREMENT_channel_array
+ 228 0004 00000000 	 .word backgnd_config
+ 229 0008 00000000 	 .word global_iclass_config
+ 230 000c 00000000 	 .word GLOBAL_ADC_0
+ 231 0010 00000000 	 .word 0
+ 232 0014 00000000 	 .word 0
+ 233 0018 02       	 .byte 2
+ 234 0019 04       	 .byte 4
+ 235 001a 01       	 .byte 1
+ 236 001b 00       	 .space 1
+ 237              	 .text
+ 238              	.Letext0:
+ 239              	 .file 1 "c:\\infineon\\tools\\dave ide\\4.5.0.202105191637\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 240              	 .file 2 "c:\\infineon\\tools\\dave ide\\4.5.0.202105191637\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 241              	 .file 3 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/CMSIS/Infineon/XMC4700_series/Include/XMC4700.h"
+ 242              	 .file 4 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/XMCLib/inc/xmc_vadc.h"
+ 243              	 .file 5 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/GLOBAL_ADC/global_adc.h"
+ 244              	 .file 6 "../Dave/Generated/ADC_MEASUREMENT/adc_measurement.h"
+ 245              	 .file 7 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/CMSIS/Include/cmsis_gcc.h"
+ 246              	 .file 8 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/CMSIS/Include/core_cm4.h"
+ 247              	 .file 9 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/CMSIS/Infineon/XMC4700_series/Include/system_XMC4700.h"
+ 248              	 .file 10 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/GLOBAL_ADC/global_adc_extern.h"
+ 249              	 .file 11 "../Dave/Generated/ADC_MEASUREMENT/adc_measurement_conf.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 adc_measurement_conf.c
+    {standard input}:24     .rodata.global_iclass_config:00000000 global_iclass_config
+    {standard input}:21     .rodata.global_iclass_config:00000000 $d
+    {standard input}:31     .data.BatteryVoltage_ch_config:00000000 BatteryVoltage_ch_config
+    {standard input}:28     .data.BatteryVoltage_ch_config:00000000 $d
+    {standard input}:46     .bss.BatteryVoltage_res_config:00000000 BatteryVoltage_res_config
+    {standard input}:43     .bss.BatteryVoltage_res_config:00000000 $d
+    {standard input}:53     .data.ADC_MEASUREMENT_BatteryVoltage_handle:00000000 ADC_MEASUREMENT_BatteryVoltage_handle
+    {standard input}:50     .data.ADC_MEASUREMENT_BatteryVoltage_handle:00000000 $d
+    {standard input}:65     .data.Termperature_ch_config:00000000 Termperature_ch_config
+    {standard input}:62     .data.Termperature_ch_config:00000000 $d
+    {standard input}:80     .bss.Termperature_res_config:00000000 Termperature_res_config
+    {standard input}:77     .bss.Termperature_res_config:00000000 $d
+    {standard input}:87     .data.ADC_MEASUREMENT_Termperature_handle:00000000 ADC_MEASUREMENT_Termperature_handle
+    {standard input}:84     .data.ADC_MEASUREMENT_Termperature_handle:00000000 $d
+    {standard input}:99     .data.lumen_ch_config:00000000 lumen_ch_config
+    {standard input}:96     .data.lumen_ch_config:00000000 $d
+    {standard input}:114    .bss.lumen_res_config:00000000 lumen_res_config
+    {standard input}:111    .bss.lumen_res_config:00000000 $d
+    {standard input}:121    .data.ADC_MEASUREMENT_lumen_handle:00000000 ADC_MEASUREMENT_lumen_handle
+    {standard input}:118    .data.ADC_MEASUREMENT_lumen_handle:00000000 $d
+    {standard input}:133    .data.weight_ch_config:00000000 weight_ch_config
+    {standard input}:130    .data.weight_ch_config:00000000 $d
+    {standard input}:148    .bss.weight_res_config:00000000 weight_res_config
+    {standard input}:145    .bss.weight_res_config:00000000 $d
+    {standard input}:155    .data.ADC_MEASUREMENT_weight_handle:00000000 ADC_MEASUREMENT_weight_handle
+    {standard input}:152    .data.ADC_MEASUREMENT_weight_handle:00000000 $d
+    {standard input}:167    .data.current_ch_config:00000000 current_ch_config
+    {standard input}:164    .data.current_ch_config:00000000 $d
+    {standard input}:182    .bss.current_res_config:00000000 current_res_config
+    {standard input}:179    .bss.current_res_config:00000000 $d
+    {standard input}:189    .data.ADC_MEASUREMENT_current_handle:00000000 ADC_MEASUREMENT_current_handle
+    {standard input}:186    .data.ADC_MEASUREMENT_current_handle:00000000 $d
+    {standard input}:201    .data.ADC_MEASUREMENT_channel_array:00000000 ADC_MEASUREMENT_channel_array
+    {standard input}:198    .data.ADC_MEASUREMENT_channel_array:00000000 $d
+    {standard input}:212    .rodata.backgnd_config:00000000 backgnd_config
+    {standard input}:209    .rodata.backgnd_config:00000000 $d
+    {standard input}:226    .data.ADC_MEASUREMENT_0:00000000 ADC_MEASUREMENT_0
+    {standard input}:223    .data.ADC_MEASUREMENT_0:00000000 $d
+
+UNDEFINED SYMBOLS
+GLOBAL_ADC_0

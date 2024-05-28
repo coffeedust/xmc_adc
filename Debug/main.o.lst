@@ -1,0 +1,608 @@
+   1              	 .syntax unified
+   2              	 .cpu cortex-m4
+   3              	 .eabi_attribute 27,3
+   4              	 .fpu fpv4-sp-d16
+   5              	 .eabi_attribute 20,1
+   6              	 .eabi_attribute 21,1
+   7              	 .eabi_attribute 23,3
+   8              	 .eabi_attribute 24,1
+   9              	 .eabi_attribute 25,1
+  10              	 .eabi_attribute 26,1
+  11              	 .eabi_attribute 30,6
+  12              	 .eabi_attribute 34,1
+  13              	 .eabi_attribute 18,4
+  14              	 .thumb
+  15              	 .file "main.c"
+  16              	 .text
+  17              	.Ltext0:
+  18              	 .cfi_sections .debug_frame
+  19              	 .section .text._write,"ax",%progbits
+  20              	 .align 2
+  21              	 .global _write
+  22              	 .thumb
+  23              	 .thumb_func
+  25              	_write:
+  26              	.LFB369:
+  27              	 .file 1 "../main.c"
+   1:../main.c     **** #include "DAVE.h"                 //Declarations from DAVE Code Generation (includes SFR declaratio
+   2:../main.c     **** #include <stdio.h>
+   3:../main.c     **** 
+   4:../main.c     **** int _write(int file, char *p, int len) {
+  28              	 .loc 1 4 0
+  29              	 .cfi_startproc
+  30              	 
+  31              	 
+  32 0000 80B5     	 push {r7,lr}
+  33              	.LCFI0:
+  34              	 .cfi_def_cfa_offset 8
+  35              	 .cfi_offset 7,-8
+  36              	 .cfi_offset 14,-4
+  37 0002 84B0     	 sub sp,sp,#16
+  38              	.LCFI1:
+  39              	 .cfi_def_cfa_offset 24
+  40 0004 00AF     	 add r7,sp,#0
+  41              	.LCFI2:
+  42              	 .cfi_def_cfa_register 7
+  43 0006 F860     	 str r0,[r7,#12]
+  44 0008 B960     	 str r1,[r7,#8]
+  45 000a 7A60     	 str r2,[r7,#4]
+   5:../main.c     **** 	UART_Transmit(&UART_0, p, len);
+  46              	 .loc 1 5 0
+  47 000c 7B68     	 ldr r3,[r7,#4]
+  48 000e 0548     	 ldr r0,.L3
+  49 0010 B968     	 ldr r1,[r7,#8]
+  50 0012 1A46     	 mov r2,r3
+  51 0014 FFF7FEFF 	 bl UART_Transmit
+   6:../main.c     **** 	return len;
+  52              	 .loc 1 6 0
+  53 0018 7B68     	 ldr r3,[r7,#4]
+   7:../main.c     **** }
+  54              	 .loc 1 7 0
+  55 001a 1846     	 mov r0,r3
+  56 001c 1037     	 adds r7,r7,#16
+  57              	.LCFI3:
+  58              	 .cfi_def_cfa_offset 8
+  59 001e BD46     	 mov sp,r7
+  60              	.LCFI4:
+  61              	 .cfi_def_cfa_register 13
+  62              	 
+  63 0020 80BD     	 pop {r7,pc}
+  64              	.L4:
+  65 0022 00BF     	 .align 2
+  66              	.L3:
+  67 0024 00000000 	 .word UART_0
+  68              	 .cfi_endproc
+  69              	.LFE369:
+  71              	 .comm delay1000,4,4
+  72              	 .section .text.callback,"ax",%progbits
+  73              	 .align 2
+  74              	 .global callback
+  75              	 .thumb
+  76              	 .thumb_func
+  78              	callback:
+  79              	.LFB370:
+   8:../main.c     **** 
+   9:../main.c     **** int delay1000;
+  10:../main.c     **** 
+  11:../main.c     **** // 1ms
+  12:../main.c     **** void callback() {
+  80              	 .loc 1 12 0
+  81              	 .cfi_startproc
+  82              	 
+  83              	 
+  84              	 
+  85 0000 80B4     	 push {r7}
+  86              	.LCFI5:
+  87              	 .cfi_def_cfa_offset 4
+  88              	 .cfi_offset 7,-4
+  89 0002 00AF     	 add r7,sp,#0
+  90              	.LCFI6:
+  91              	 .cfi_def_cfa_register 7
+  13:../main.c     **** 	if(delay1000 > 0)
+  92              	 .loc 1 13 0
+  93 0004 064B     	 ldr r3,.L7
+  94 0006 1B68     	 ldr r3,[r3]
+  95 0008 002B     	 cmp r3,#0
+  96 000a 04DD     	 ble .L5
+  14:../main.c     **** 		delay1000--;
+  97              	 .loc 1 14 0
+  98 000c 044B     	 ldr r3,.L7
+  99 000e 1B68     	 ldr r3,[r3]
+ 100 0010 013B     	 subs r3,r3,#1
+ 101 0012 034A     	 ldr r2,.L7
+ 102 0014 1360     	 str r3,[r2]
+ 103              	.L5:
+  15:../main.c     **** 
+  16:../main.c     **** }
+ 104              	 .loc 1 16 0
+ 105 0016 BD46     	 mov sp,r7
+ 106              	.LCFI7:
+ 107              	 .cfi_def_cfa_register 13
+ 108              	 
+ 109 0018 5DF8047B 	 ldr r7,[sp],#4
+ 110              	.LCFI8:
+ 111              	 .cfi_restore 7
+ 112              	 .cfi_def_cfa_offset 0
+ 113 001c 7047     	 bx lr
+ 114              	.L8:
+ 115 001e 00BF     	 .align 2
+ 116              	.L7:
+ 117 0020 00000000 	 .word delay1000
+ 118              	 .cfi_endproc
+ 119              	.LFE370:
+ 121              	 .section .text.delay,"ax",%progbits
+ 122              	 .align 2
+ 123              	 .global delay
+ 124              	 .thumb
+ 125              	 .thumb_func
+ 127              	delay:
+ 128              	.LFB371:
+  17:../main.c     **** 
+  18:../main.c     **** void delay(int d) {
+ 129              	 .loc 1 18 0
+ 130              	 .cfi_startproc
+ 131              	 
+ 132              	 
+ 133              	 
+ 134 0000 80B4     	 push {r7}
+ 135              	.LCFI9:
+ 136              	 .cfi_def_cfa_offset 4
+ 137              	 .cfi_offset 7,-4
+ 138 0002 83B0     	 sub sp,sp,#12
+ 139              	.LCFI10:
+ 140              	 .cfi_def_cfa_offset 16
+ 141 0004 00AF     	 add r7,sp,#0
+ 142              	.LCFI11:
+ 143              	 .cfi_def_cfa_register 7
+ 144 0006 7860     	 str r0,[r7,#4]
+  19:../main.c     **** 	delay1000 = d;
+ 145              	 .loc 1 19 0
+ 146 0008 064A     	 ldr r2,.L11
+ 147 000a 7B68     	 ldr r3,[r7,#4]
+ 148 000c 1360     	 str r3,[r2]
+  20:../main.c     **** 	while(delay1000 > 0)
+ 149              	 .loc 1 20 0
+ 150 000e 00BF     	 nop
+ 151              	.L10:
+ 152              	 .loc 1 20 0 is_stmt 0 discriminator 1
+ 153 0010 044B     	 ldr r3,.L11
+ 154 0012 1B68     	 ldr r3,[r3]
+ 155 0014 002B     	 cmp r3,#0
+ 156 0016 FBDC     	 bgt .L10
+  21:../main.c     **** 		;
+  22:../main.c     **** }
+ 157              	 .loc 1 22 0 is_stmt 1
+ 158 0018 0C37     	 adds r7,r7,#12
+ 159              	.LCFI12:
+ 160              	 .cfi_def_cfa_offset 4
+ 161 001a BD46     	 mov sp,r7
+ 162              	.LCFI13:
+ 163              	 .cfi_def_cfa_register 13
+ 164              	 
+ 165 001c 5DF8047B 	 ldr r7,[sp],#4
+ 166              	.LCFI14:
+ 167              	 .cfi_restore 7
+ 168              	 .cfi_def_cfa_offset 0
+ 169 0020 7047     	 bx lr
+ 170              	.L12:
+ 171 0022 00BF     	 .align 2
+ 172              	.L11:
+ 173 0024 00000000 	 .word delay1000
+ 174              	 .cfi_endproc
+ 175              	.LFE371:
+ 177              	 .global __aeabi_i2d
+ 178              	 .global __aeabi_dsub
+ 179              	 .global __aeabi_dadd
+ 180              	 .global __aeabi_ddiv
+ 181              	 .section .text.movingMean,"ax",%progbits
+ 182              	 .align 2
+ 183              	 .global movingMean
+ 184              	 .thumb
+ 185              	 .thumb_func
+ 187              	movingMean:
+ 188              	.LFB372:
+  23:../main.c     **** 
+  24:../main.c     **** double movingMean(int inValue) {
+ 189              	 .loc 1 24 0
+ 190              	 .cfi_startproc
+ 191              	 
+ 192              	 
+ 193 0000 B0B5     	 push {r4,r5,r7,lr}
+ 194              	.LCFI15:
+ 195              	 .cfi_def_cfa_offset 16
+ 196              	 .cfi_offset 4,-16
+ 197              	 .cfi_offset 5,-12
+ 198              	 .cfi_offset 7,-8
+ 199              	 .cfi_offset 14,-4
+ 200 0002 82B0     	 sub sp,sp,#8
+ 201              	.LCFI16:
+ 202              	 .cfi_def_cfa_offset 24
+ 203 0004 00AF     	 add r7,sp,#0
+ 204              	.LCFI17:
+ 205              	 .cfi_def_cfa_register 7
+ 206 0006 7860     	 str r0,[r7,#4]
+  25:../main.c     **** #define max 100
+  26:../main.c     **** 	static double sum = 0;
+  27:../main.c     **** 	static int buffer[max];
+  28:../main.c     **** 	static int pos = 0;
+  29:../main.c     **** 	// -
+  30:../main.c     **** 	sum -= buffer[pos];
+ 207              	 .loc 1 30 0
+ 208 0008 284B     	 ldr r3,.L15
+ 209 000a D3E90045 	 ldrd r4,[r3]
+ 210 000e 284B     	 ldr r3,.L15+4
+ 211 0010 1B68     	 ldr r3,[r3]
+ 212 0012 284A     	 ldr r2,.L15+8
+ 213 0014 52F82330 	 ldr r3,[r2,r3,lsl#2]
+ 214 0018 1846     	 mov r0,r3
+ 215 001a FFF7FEFF 	 bl __aeabi_i2d
+ 216 001e 0246     	 mov r2,r0
+ 217 0020 0B46     	 mov r3,r1
+ 218 0022 2046     	 mov r0,r4
+ 219 0024 2946     	 mov r1,r5
+ 220 0026 FFF7FEFF 	 bl __aeabi_dsub
+ 221 002a 0246     	 mov r2,r0
+ 222 002c 0B46     	 mov r3,r1
+ 223 002e 1F49     	 ldr r1,.L15
+ 224 0030 C1E90023 	 strd r2,[r1]
+  31:../main.c     **** 	// c
+  32:../main.c     **** 	buffer[pos] = inValue;
+ 225              	 .loc 1 32 0
+ 226 0034 1E4B     	 ldr r3,.L15+4
+ 227 0036 1B68     	 ldr r3,[r3]
+ 228 0038 1E49     	 ldr r1,.L15+8
+ 229 003a 7A68     	 ldr r2,[r7,#4]
+ 230 003c 41F82320 	 str r2,[r1,r3,lsl#2]
+  33:../main.c     **** 	// +
+  34:../main.c     **** 	sum += buffer[pos];
+ 231              	 .loc 1 34 0
+ 232 0040 1B4B     	 ldr r3,.L15+4
+ 233 0042 1B68     	 ldr r3,[r3]
+ 234 0044 1B4A     	 ldr r2,.L15+8
+ 235 0046 52F82330 	 ldr r3,[r2,r3,lsl#2]
+ 236 004a 1846     	 mov r0,r3
+ 237 004c FFF7FEFF 	 bl __aeabi_i2d
+ 238 0050 164B     	 ldr r3,.L15
+ 239 0052 D3E90023 	 ldrd r2,[r3]
+ 240 0056 FFF7FEFF 	 bl __aeabi_dadd
+ 241 005a 0246     	 mov r2,r0
+ 242 005c 0B46     	 mov r3,r1
+ 243 005e 1349     	 ldr r1,.L15
+ 244 0060 C1E90023 	 strd r2,[r1]
+  35:../main.c     **** 	pos++;
+ 245              	 .loc 1 35 0
+ 246 0064 124B     	 ldr r3,.L15+4
+ 247 0066 1B68     	 ldr r3,[r3]
+ 248 0068 0133     	 adds r3,r3,#1
+ 249 006a 114A     	 ldr r2,.L15+4
+ 250 006c 1360     	 str r3,[r2]
+  36:../main.c     **** 	pos %= max;
+ 251              	 .loc 1 36 0
+ 252 006e 104B     	 ldr r3,.L15+4
+ 253 0070 1A68     	 ldr r2,[r3]
+ 254 0072 114B     	 ldr r3,.L15+12
+ 255 0074 83FB0213 	 smull r1,r3,r3,r2
+ 256 0078 5911     	 asrs r1,r3,#5
+ 257 007a D317     	 asrs r3,r2,#31
+ 258 007c CB1A     	 subs r3,r1,r3
+ 259 007e 6421     	 movs r1,#100
+ 260 0080 01FB03F3 	 mul r3,r1,r3
+ 261 0084 D31A     	 subs r3,r2,r3
+ 262 0086 0A4A     	 ldr r2,.L15+4
+ 263 0088 1360     	 str r3,[r2]
+  37:../main.c     **** 	return sum / (double)max;
+ 264              	 .loc 1 37 0
+ 265 008a 084B     	 ldr r3,.L15
+ 266 008c D3E90023 	 ldrd r2,[r3]
+ 267 0090 1046     	 mov r0,r2
+ 268 0092 1946     	 mov r1,r3
+ 269 0094 4FF00002 	 mov r2,#0
+ 270 0098 084B     	 ldr r3,.L15+16
+ 271 009a FFF7FEFF 	 bl __aeabi_ddiv
+ 272 009e 0246     	 mov r2,r0
+ 273 00a0 0B46     	 mov r3,r1
+  38:../main.c     **** }
+ 274              	 .loc 1 38 0
+ 275 00a2 1046     	 mov r0,r2
+ 276 00a4 1946     	 mov r1,r3
+ 277 00a6 0837     	 adds r7,r7,#8
+ 278              	.LCFI18:
+ 279              	 .cfi_def_cfa_offset 16
+ 280 00a8 BD46     	 mov sp,r7
+ 281              	.LCFI19:
+ 282              	 .cfi_def_cfa_register 13
+ 283              	 
+ 284 00aa B0BD     	 pop {r4,r5,r7,pc}
+ 285              	.L16:
+ 286              	 .align 2
+ 287              	.L15:
+ 288 00ac 00000000 	 .word sum.10425
+ 289 00b0 00000000 	 .word pos.10427
+ 290 00b4 00000000 	 .word buffer.10426
+ 291 00b8 1F85EB51 	 .word 1374389535
+ 292 00bc 00005940 	 .word 1079574528
+ 293              	 .cfi_endproc
+ 294              	.LFE372:
+ 296              	 .section .rodata
+ 297              	 .align 2
+ 298              	.LC0:
+ 299 0000 73746172 	 .ascii "start...\000"
+ 299      742E2E2E 
+ 299      00
+ 300              	 .global __aeabi_d2f
+ 301              	 .global __aeabi_f2d
+ 302 0009 000000   	 .align 2
+ 303              	.LC1:
+ 304 000c 25662C25 	 .ascii "%f,%f,%f,%f,%f\012\000"
+ 304      662C2566 
+ 304      2C25662C 
+ 304      25660A00 
+ 305              	 .section .text.main,"ax",%progbits
+ 306              	 .align 2
+ 307              	 .global main
+ 308              	 .thumb
+ 309              	 .thumb_func
+ 311              	main:
+ 312              	.LFB373:
+  39:../main.c     **** 
+  40:../main.c     **** int main(void)
+  41:../main.c     **** {
+ 313              	 .loc 1 41 0
+ 314              	 .cfi_startproc
+ 315              	 
+ 316              	 
+ 317 0000 2DE9B04F 	 push {r4,r5,r7,r8,r9,r10,fp,lr}
+ 318              	.LCFI20:
+ 319              	 .cfi_def_cfa_offset 32
+ 320              	 .cfi_offset 4,-32
+ 321              	 .cfi_offset 5,-28
+ 322              	 .cfi_offset 7,-24
+ 323              	 .cfi_offset 8,-20
+ 324              	 .cfi_offset 9,-16
+ 325              	 .cfi_offset 10,-12
+ 326              	 .cfi_offset 11,-8
+ 327              	 .cfi_offset 14,-4
+ 328 0004 92B0     	 sub sp,sp,#72
+ 329              	.LCFI21:
+ 330              	 .cfi_def_cfa_offset 104
+ 331 0006 08AF     	 add r7,sp,#32
+ 332              	.LCFI22:
+ 333              	 .cfi_def_cfa 7,72
+  42:../main.c     ****   DAVE_STATUS_t status;
+  43:../main.c     **** 
+  44:../main.c     ****   status = DAVE_Init();           /* Initialization of DAVE APPs  */
+ 334              	 .loc 1 44 0
+ 335 0008 FFF7FEFF 	 bl DAVE_Init
+ 336 000c 0346     	 mov r3,r0
+ 337 000e 87F82730 	 strb r3,[r7,#39]
+  45:../main.c     **** 
+  46:../main.c     ****   if (status != DAVE_STATUS_SUCCESS)
+ 338              	 .loc 1 46 0
+ 339 0012 97F82730 	 ldrb r3,[r7,#39]
+ 340 0016 002B     	 cmp r3,#0
+ 341 0018 00D0     	 beq .L18
+ 342              	.L19:
+  47:../main.c     ****   {
+  48:../main.c     ****     /* Placeholder for error handler code. The while loop below can be replaced with an user error 
+  49:../main.c     ****     XMC_DEBUG("DAVE APPs initialization failed\n");
+  50:../main.c     **** 
+  51:../main.c     ****     while(1U)
+  52:../main.c     ****     {
+  53:../main.c     **** 
+  54:../main.c     ****     }
+ 343              	 .loc 1 54 0 discriminator 1
+ 344 001a FEE7     	 b .L19
+ 345              	.L18:
+  55:../main.c     ****   }
+  56:../main.c     **** 
+  57:../main.c     ****   int id = SYSTIMER_CreateTimer(1000, SYSTIMER_MODE_PERIODIC, callback, NULL);
+ 346              	 .loc 1 57 0
+ 347 001c 4FF47A70 	 mov r0,#1000
+ 348 0020 0121     	 movs r1,#1
+ 349 0022 384A     	 ldr r2,.L21
+ 350 0024 0023     	 movs r3,#0
+ 351 0026 FFF7FEFF 	 bl SYSTIMER_CreateTimer
+ 352 002a 0346     	 mov r3,r0
+ 353 002c 3B62     	 str r3,[r7,#32]
+  58:../main.c     **** 
+  59:../main.c     ****   SYSTIMER_StartTimer(id);
+ 354              	 .loc 1 59 0
+ 355 002e 3B6A     	 ldr r3,[r7,#32]
+ 356 0030 1846     	 mov r0,r3
+ 357 0032 FFF7FEFF 	 bl SYSTIMER_StartTimer
+  60:../main.c     **** 
+  61:../main.c     ****   printf("start...\n");
+ 358              	 .loc 1 61 0
+ 359 0036 3448     	 ldr r0,.L21+4
+ 360 0038 FFF7FEFF 	 bl puts
+ 361              	.L20:
+ 362              	.LBB2:
+  62:../main.c     ****   /* Placeholder for user application code. The while loop below can be replaced with user applicat
+  63:../main.c     ****   while(1U)
+  64:../main.c     ****   {
+  65:../main.c     ****   	ADC_MEASUREMENT_StartConversion(&ADC_MEASUREMENT_0);
+ 363              	 .loc 1 65 0 discriminator 1
+ 364 003c 3348     	 ldr r0,.L21+8
+ 365 003e FFF7FEFF 	 bl ADC_MEASUREMENT_StartConversion
+  66:../main.c     ****   	delay(5);
+ 366              	 .loc 1 66 0 discriminator 1
+ 367 0042 0520     	 movs r0,#5
+ 368 0044 FFF7FEFF 	 bl delay
+  67:../main.c     ****   	float adcValue1 = movingMean(ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_BatteryVoltage_handle));
+ 369              	 .loc 1 67 0 discriminator 1
+ 370 0048 3148     	 ldr r0,.L21+12
+ 371 004a FFF7FEFF 	 bl ADC_MEASUREMENT_GetResult
+ 372 004e 0346     	 mov r3,r0
+ 373 0050 1846     	 mov r0,r3
+ 374 0052 FFF7FEFF 	 bl movingMean
+ 375 0056 0246     	 mov r2,r0
+ 376 0058 0B46     	 mov r3,r1
+ 377 005a 1046     	 mov r0,r2
+ 378 005c 1946     	 mov r1,r3
+ 379 005e FFF7FEFF 	 bl __aeabi_d2f
+ 380 0062 0346     	 mov r3,r0
+ 381 0064 FB61     	 str r3,[r7,#28]
+  68:../main.c     ****   	float adcValue2 = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_Termperature_handle);
+ 382              	 .loc 1 68 0 discriminator 1
+ 383 0066 2B48     	 ldr r0,.L21+16
+ 384 0068 FFF7FEFF 	 bl ADC_MEASUREMENT_GetResult
+ 385 006c 0346     	 mov r3,r0
+ 386 006e 07EE903A 	 fmsr s15,r3
+ 387 0072 F8EE677A 	 fuitos s15,s15
+ 388 0076 C7ED067A 	 fsts s15,[r7,#24]
+  69:../main.c     ****   	float adcValue3 = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_lumen_handle);
+ 389              	 .loc 1 69 0 discriminator 1
+ 390 007a 2748     	 ldr r0,.L21+20
+ 391 007c FFF7FEFF 	 bl ADC_MEASUREMENT_GetResult
+ 392 0080 0346     	 mov r3,r0
+ 393 0082 07EE903A 	 fmsr s15,r3
+ 394 0086 F8EE677A 	 fuitos s15,s15
+ 395 008a C7ED057A 	 fsts s15,[r7,#20]
+  70:../main.c     ****   	float adcValue4 = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_weight_handle);
+ 396              	 .loc 1 70 0 discriminator 1
+ 397 008e 2348     	 ldr r0,.L21+24
+ 398 0090 FFF7FEFF 	 bl ADC_MEASUREMENT_GetResult
+ 399 0094 0346     	 mov r3,r0
+ 400 0096 07EE903A 	 fmsr s15,r3
+ 401 009a F8EE677A 	 fuitos s15,s15
+ 402 009e C7ED047A 	 fsts s15,[r7,#16]
+  71:../main.c     ****   	float adcValue5 = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_current_handle);
+ 403              	 .loc 1 71 0 discriminator 1
+ 404 00a2 1F48     	 ldr r0,.L21+28
+ 405 00a4 FFF7FEFF 	 bl ADC_MEASUREMENT_GetResult
+ 406 00a8 0346     	 mov r3,r0
+ 407 00aa 07EE903A 	 fmsr s15,r3
+ 408 00ae F8EE677A 	 fuitos s15,s15
+ 409 00b2 C7ED037A 	 fsts s15,[r7,#12]
+  72:../main.c     ****   	printf("%f,%f,%f,%f,%f\n", adcValue1, adcValue2, adcValue3, adcValue4, adcValue5);
+ 410              	 .loc 1 72 0 discriminator 1
+ 411 00b6 F869     	 ldr r0,[r7,#28]
+ 412 00b8 FFF7FEFF 	 bl __aeabi_f2d
+ 413 00bc C7E90001 	 strd r0,[r7]
+ 414 00c0 B869     	 ldr r0,[r7,#24]
+ 415 00c2 FFF7FEFF 	 bl __aeabi_f2d
+ 416 00c6 8246     	 mov r10,r0
+ 417 00c8 8B46     	 mov fp,r1
+ 418 00ca 7869     	 ldr r0,[r7,#20]
+ 419 00cc FFF7FEFF 	 bl __aeabi_f2d
+ 420 00d0 8046     	 mov r8,r0
+ 421 00d2 8946     	 mov r9,r1
+ 422 00d4 3869     	 ldr r0,[r7,#16]
+ 423 00d6 FFF7FEFF 	 bl __aeabi_f2d
+ 424 00da 0446     	 mov r4,r0
+ 425 00dc 0D46     	 mov r5,r1
+ 426 00de F868     	 ldr r0,[r7,#12]
+ 427 00e0 FFF7FEFF 	 bl __aeabi_f2d
+ 428 00e4 0246     	 mov r2,r0
+ 429 00e6 0B46     	 mov r3,r1
+ 430 00e8 CDE900AB 	 strd r10,[sp]
+ 431 00ec CDE90289 	 strd r8,[sp,#8]
+ 432 00f0 CDE90445 	 strd r4,[sp,#16]
+ 433 00f4 CDE90623 	 strd r2,[sp,#24]
+ 434 00f8 0A48     	 ldr r0,.L21+32
+ 435 00fa D7E90023 	 ldrd r2,[r7]
+ 436 00fe FFF7FEFF 	 bl printf
+ 437              	.LBE2:
+  73:../main.c     ****   }
+ 438              	 .loc 1 73 0 discriminator 1
+ 439 0102 9BE7     	 b .L20
+ 440              	.L22:
+ 441              	 .align 2
+ 442              	.L21:
+ 443 0104 00000000 	 .word callback
+ 444 0108 00000000 	 .word .LC0
+ 445 010c 00000000 	 .word ADC_MEASUREMENT_0
+ 446 0110 00000000 	 .word ADC_MEASUREMENT_BatteryVoltage_handle
+ 447 0114 00000000 	 .word ADC_MEASUREMENT_Termperature_handle
+ 448 0118 00000000 	 .word ADC_MEASUREMENT_lumen_handle
+ 449 011c 00000000 	 .word ADC_MEASUREMENT_weight_handle
+ 450 0120 00000000 	 .word ADC_MEASUREMENT_current_handle
+ 451 0124 0C000000 	 .word .LC1
+ 452              	 .cfi_endproc
+ 453              	.LFE373:
+ 455              	 .section .bss.sum.10425,"aw",%nobits
+ 456              	 .align 3
+ 459              	sum.10425:
+ 460 0000 00000000 	 .space 8
+ 460      00000000 
+ 461              	 .section .bss.pos.10427,"aw",%nobits
+ 462              	 .align 2
+ 465              	pos.10427:
+ 466 0000 00000000 	 .space 4
+ 467              	 .section .bss.buffer.10426,"aw",%nobits
+ 468              	 .align 2
+ 471              	buffer.10426:
+ 472 0000 00000000 	 .space 400
+ 472      00000000 
+ 472      00000000 
+ 472      00000000 
+ 472      00000000 
+ 473              	 .text
+ 474              	.Letext0:
+ 475              	 .file 2 "c:\\infineon\\tools\\dave ide\\4.5.0.202105191637\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 476              	 .file 3 "c:\\infineon\\tools\\dave ide\\4.5.0.202105191637\\eclipse\\arm-gcc-49\\arm-none-eabi\\include\\stdint.h"
+ 477              	 .file 4 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/CMSIS/Infineon/XMC4700_series/Include/XMC4700.h"
+ 478              	 .file 5 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/XMCLib/inc/xmc_gpio.h"
+ 479              	 .file 6 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/XMCLib/inc/xmc4_gpio.h"
+ 480              	 .file 7 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/XMCLib/inc/xmc_vadc.h"
+ 481              	 .file 8 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/GLOBAL_ADC/global_adc.h"
+ 482              	 .file 9 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/ADC_MEASUREMENT/adc_measurement.h"
+ 483              	 .file 10 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/XMCLib/inc/xmc_usic.h"
+ 484              	 .file 11 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/XMCLib/inc/xmc_uart.h"
+ 485              	 .file 12 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/UART/uart.h"
+ 486              	 .file 13 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/SYSTIMER/systimer.h"
+ 487              	 .file 14 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/DAVE.h"
+ 488              	 .file 15 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/CMSIS/Include/cmsis_gcc.h"
+ 489              	 .file 16 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/CMSIS/Include/core_cm4.h"
+ 490              	 .file 17 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Libraries/CMSIS/Infineon/XMC4700_series/Include/system_XMC4700.h"
+ 491              	 .file 18 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/ADC_MEASUREMENT/adc_measurement_extern.h"
+ 492              	 .file 19 "C:/Infineon/Tools/DAVE IDE/4.5.0.202105191637/eclipse/workspace/ADC/Dave/Generated/UART/uart_extern.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+    {standard input}:20     .text._write:00000000 $t
+    {standard input}:25     .text._write:00000000 _write
+    {standard input}:67     .text._write:00000024 $d
+                            *COM*:00000004 delay1000
+    {standard input}:73     .text.callback:00000000 $t
+    {standard input}:78     .text.callback:00000000 callback
+    {standard input}:117    .text.callback:00000020 $d
+    {standard input}:122    .text.delay:00000000 $t
+    {standard input}:127    .text.delay:00000000 delay
+    {standard input}:173    .text.delay:00000024 $d
+    {standard input}:182    .text.movingMean:00000000 $t
+    {standard input}:187    .text.movingMean:00000000 movingMean
+    {standard input}:288    .text.movingMean:000000ac $d
+    {standard input}:459    .bss.sum.10425:00000000 sum.10425
+    {standard input}:465    .bss.pos.10427:00000000 pos.10427
+    {standard input}:471    .bss.buffer.10426:00000000 buffer.10426
+    {standard input}:297    .rodata:00000000 $d
+    {standard input}:306    .text.main:00000000 $t
+    {standard input}:311    .text.main:00000000 main
+    {standard input}:443    .text.main:00000104 $d
+    {standard input}:456    .bss.sum.10425:00000000 $d
+    {standard input}:462    .bss.pos.10427:00000000 $d
+    {standard input}:468    .bss.buffer.10426:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+UART_Transmit
+UART_0
+__aeabi_i2d
+__aeabi_dsub
+__aeabi_dadd
+__aeabi_ddiv
+__aeabi_d2f
+__aeabi_f2d
+DAVE_Init
+SYSTIMER_CreateTimer
+SYSTIMER_StartTimer
+puts
+ADC_MEASUREMENT_StartConversion
+ADC_MEASUREMENT_GetResult
+printf
+ADC_MEASUREMENT_0
+ADC_MEASUREMENT_BatteryVoltage_handle
+ADC_MEASUREMENT_Termperature_handle
+ADC_MEASUREMENT_lumen_handle
+ADC_MEASUREMENT_weight_handle
+ADC_MEASUREMENT_current_handle
